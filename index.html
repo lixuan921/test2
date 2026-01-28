@@ -1,0 +1,3322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>亲爱的宝贝CLL | I LOVE YOU</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: pan-y;
+        }
+        
+        :root {
+            --primary-color: #ff6b9d;
+            --secondary-color: #6a5af9;
+            --accent-color: #00d4ff;
+            --gold-color: #ffd700;
+            --pink-color: #ff9ec0;
+            --dark-color: #0a0a1a;
+            --light-color: #f8f7ff;
+            --gradient: linear-gradient(135deg, #6a5af9, #ff6b9d, #00d4ff);
+            --gold-gradient: linear-gradient(135deg, #ffd700, #ffb347, #ffd700);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--light-color);
+            overflow-x: hidden;
+            background: var(--dark-color);
+            min-height: 100vh;
+            position: relative;
+            overscroll-behavior: contain;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* 高级星空背景 - 手机端优化 */
+        .cosmic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
+            will-change: transform;
+        }
+        
+        .star-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            contain: layout style;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            will-change: transform, opacity;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* 星座连线 */
+        .constellation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            contain: layout style;
+        }
+        
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform-origin: left;
+        }
+        
+        /* 极光效果 */
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.3;
+            pointer-events: none;
+            background: linear-gradient(0deg, 
+                transparent 0%, 
+                rgba(106, 90, 249, 0.1) 20%,
+                rgba(0, 212, 255, 0.15) 40%,
+                rgba(255, 107, 157, 0.1) 60%,
+                transparent 100%);
+            animation: auroraShift 20s infinite alternate ease-in-out;
+            will-change: transform;
+        }
+        
+        @keyframes auroraShift {
+            0% { transform: translateY(0) skewY(0deg); }
+            100% { transform: translateY(-100px) skewY(2deg); }
+        }
+        
+        /* 魔法粒子 */
+        .magic-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            contain: layout style;
+        }
+        
+        .magic-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient);
+            filter: blur(2px);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        
+        /* 新增文字动画效果 */
+        @keyframes bounceIn {
+            0% { 
+                transform: translateY(-100px) scale(0.3); 
+                opacity: 0; 
+            }
+            50% { 
+                transform: translateY(20px) scale(1.1); 
+            }
+            70% { 
+                transform: translateY(-10px) scale(0.9); 
+            }
+            100% { 
+                transform: translateY(0) scale(1); 
+                opacity: 1; 
+            }
+        }
+        
+        .bounce-text {
+            animation: bounceIn 1.5s ease-out forwards;
+            transform-origin: center bottom;
+        }
+        
+        @keyframes blindsOpen {
+            0% { 
+                clip-path: inset(0 100% 0 0);
+                opacity: 0;
+            }
+            50% {
+                clip-path: inset(0 50% 0 0);
+                opacity: 0.5;
+            }
+            100% { 
+                clip-path: inset(0 0 0 0);
+                opacity: 1;
+            }
+        }
+        
+        .blinds-text {
+            animation: blindsOpen 2s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes dissolveIn {
+            0% { 
+                opacity: 0;
+                filter: blur(10px);
+            }
+            100% { 
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+        
+        .dissolve-text {
+            animation: dissolveIn 2s ease-out forwards;
+        }
+        
+        /* 手机端优化导航 */
+        .mobile-nav-container {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+            display: none;
+        }
+        
+        .mobile-nav-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            margin: 0 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1002;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 1001;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        /* 桌面导航 */
+        .nav-container {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-tooltip {
+            position: absolute;
+            right: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-btn:hover .nav-tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* 进度指示器 */
+        .progress-indicator {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 90%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .progress-indicator::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .progress-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+        
+        /* 音乐播放器 */
+        .music-player {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 50px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            max-width: 90%;
+            min-width: 260px;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .music-player:active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .music-control {
+            background: transparent;
+            border: none;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            padding: 5px;
+            min-width: 35px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .music-control:active {
+            transform: scale(0.9);
+        }
+        
+        .music-info {
+            font-size: 0.8rem;
+            color: var(--light-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
+        }
+        
+        .volume-slider {
+            width: 60px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        
+        /* 手机端手势提示 */
+        .swipe-hint {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1001;
+            animation: fadeInOut 3s infinite;
+            display: none;
+            pointer-events: none;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        /* 页面容器 */
+        .page-container {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        
+        /* 页面 */
+        .page {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 70px 15px 120px;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+            contain: content;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .page.active {
+            opacity: 1;
+            transform: translateY(0);
+            position: relative;
+            pointer-events: all;
+        }
+        
+        /* 页面顶部空白区域 */
+        .page-top {
+            height: 80px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+            margin-bottom: 30px;
+            pointer-events: none;
+            font-size: 0.9rem;
+        }
+        
+        /* 页面底部空白区域 */
+        .page-bottom {
+            height: 150px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+            margin-top: 30px;
+            pointer-events: none;
+            font-size: 0.9rem;
+        }
+        
+        .page-content {
+            max-width: 100%;
+            width: 100%;
+            padding: 20px 15px;
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: calc(100vh - 230px); /* 减去顶部和底部空间 */
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            font-family: 'Gravitas One', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            line-height: 1.2;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 10px;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold-gradient);
+            border-radius: 2px;
+        }
+        
+        .page-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-align: center;
+            font-style: italic;
+            line-height: 1.3;
+        }
+        
+        .page-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            padding: 0 5px;
+        }
+        
+        /* 特殊文本效果 */
+        .romantic-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            color: var(--pink-color);
+            text-shadow: 0 0 10px rgba(255, 158, 192, 0.5);
+            margin: 15px 0;
+            animation: gentleFloat 3s infinite ease-in-out;
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        /* 互动按钮 */
+        .romantic-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(106, 90, 249, 0.4);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        .romantic-btn:active {
+            transform: translateY(-5px) scale(0.98);
+            box-shadow: 0 15px 30px rgba(106, 90, 249, 0.6);
+        }
+        
+        .romantic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .romantic-btn:active::before {
+            left: 100%;
+        }
+        
+        /* 神奇轮播图 */
+        .magic-carousel {
+            width: 100%;
+            max-width: 100%;
+            margin: 25px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            touch-action: pan-y pinch-zoom;
+        }
+        
+        .carousel-container {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 15px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            pointer-events: none;
+        }
+        
+        .carousel-slide.active img {
+            transform: scale(1.05);
+        }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .carousel-nav.prev {
+            left: 10px;
+        }
+        
+        .carousel-nav.next {
+            right: 10px;
+        }
+        
+        .carousel-nav:active {
+            opacity: 1;
+            transform: translateY(-50%) scale(0.9);
+        }
+        
+        /* 时间轴 */
+        .love-timeline {
+            position: relative;
+            max-width: 100%;
+            margin: 40px auto;
+        }
+        
+        .love-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+        
+        .timeline-moment {
+            margin: 35px 0;
+            position: relative;
+            width: calc(100% - 40px);
+            left: 40px !important;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+            will-change: transform, opacity;
+        }
+        
+        .timeline-moment.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-heart {
+            position: absolute;
+            top: 0;
+            left: -35px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            box-shadow: 0 0 15px var(--primary-color);
+            z-index: 2;
+        }
+        
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .timeline-content:active {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+        }
+        
+        .timeline-date {
+            font-size: 1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* 爱情信物展示 */
+        .magic-tokens {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 35px 0;
+        }
+        
+        .magic-token {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            font-size: 2rem;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        .magic-token:active {
+            transform: translateY(-8px) scale(1.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px rgba(106, 90, 249, 0.4);
+        }
+        
+        .magic-token::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+        
+        .magic-token:active::before {
+            opacity: 0.3;
+        }
+        
+        /* 视频容器 */
+        .magic-video-container {
+            width: 100%;
+            max-width: 100%;
+            margin: 25px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            position: relative;
+            border: 2px solid transparent;
+            background: var(--gradient);
+            padding: 3px;
+        }
+        
+        .magic-video-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient);
+            border-radius: 15px;
+            z-index: -1;
+            animation: borderGlow 3s infinite linear;
+        }
+        
+        @keyframes borderGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* 求婚页面特别样式 */
+        .proposal-sanctuary {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 100%;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .proposal-sanctuary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.05;
+            z-index: -1;
+        }
+        
+        .proposal-question {
+            font-family: 'Rubik Storm', cursive;
+            font-size: 2.5rem;
+            color: var(--gold-color);
+            margin: 25px 0;
+            animation: heartbeat 2s infinite ease-in-out;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            line-height: 1.2;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.03); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.02); }
+        }
+        
+        .ring-sanctuary {
+            width: 180px;
+            height: 180px;
+            margin: 25px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .magic-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--accent-color);
+            animation: spinRing 4s linear infinite;
+        }
+        
+        .magic-ring:nth-child(2) {
+            border-top-color: var(--primary-color);
+            animation-duration: 6s;
+            animation-direction: reverse;
+        }
+        
+        .magic-ring:nth-child(3) {
+            border-top-color: var(--gold-color);
+            animation-duration: 8s;
+        }
+        
+        .diamond-sanctuary {
+            width: 70px;
+            height: 70px;
+            background: white;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            z-index: 2;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+            animation: diamondSparkle 2s infinite alternate;
+        }
+        
+        @keyframes diamondSparkle {
+            0% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); }
+            100% { box-shadow: 0 0 30px rgba(255, 255, 255, 1); }
+        }
+        
+        /* 逃跑按钮样式 */
+        .runaway-btn {
+            position: absolute;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+            pointer-events: auto;
+        }
+        
+        /* 求婚页面按钮容器 */
+        .proposal-buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            position: relative;
+            min-height: 250px;
+            width: 100%;
+        }
+        
+        /* 交互爱心 */
+        .floating-heart {
+            position: absolute;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+            filter: drop-shadow(0 0 10px currentColor);
+            will-change: transform, opacity;
+        }
+        
+        /* 爱情誓言书 */
+        .love-vow {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px auto;
+            max-width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .vow-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--pink-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .vow-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* 最后一页特别样式 */
+        .final-page-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+        }
+        
+        .photo-frame {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid transparent;
+            background: var(--gradient);
+            margin: 25px auto;
+            padding: 5px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            animation: floatFrame 6s infinite ease-in-out;
+        }
+        
+        @keyframes floatFrame {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .final-message {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 25px auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 优化后的烟花特效容器 */
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            contain: layout style;
+        }
+        
+        .firework {
+            position: absolute;
+            pointer-events: none;
+        }
+        
+        .firework-particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+        
+        /* 性能优化类 */
+        .will-change {
+            will-change: transform, opacity;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                display: none;
+            }
+            
+            .mobile-nav-container {
+                display: flex;
+            }
+            
+            .swipe-hint {
+                display: flex;
+            }
+            
+            .music-player {
+                bottom: 70px;
+                padding: 8px 15px;
+                min-width: 260px;
+            }
+            
+            .back-to-top {
+                bottom: 15px;
+                left: 15px;
+            }
+            
+            .progress-indicator {
+                top: 15px;
+                padding: 6px 14px;
+            }
+            
+            .progress-dot {
+                width: 8px;
+                height: 8px;
+            }
+            
+            /* 手机端按钮层级调整 */
+            .mobile-nav-container {
+                z-index: 1002;
+            }
+            
+            .back-to-top {
+                z-index: 1001;
+            }
+            
+            .music-player {
+                z-index: 1000;
+            }
+            
+            /* 轮播图手机端样式 */
+            .carousel-slide {
+                height: 280px;
+            }
+            
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .carousel-nav.prev {
+                left: 10px;
+            }
+            
+            .carousel-nav.next {
+                right: 10px;
+            }
+            
+            .photo-frame {
+                width: 200px;
+                height: 200px;
+            }
+            
+            /* 求婚页面按钮在手机端垂直排列 */
+            .proposal-buttons-container {
+                min-height: 300px;
+            }
+            
+            /* 新增页面标题在手机端的调整 */
+            .page-title {
+                font-size: 2rem;
+                min-height: 100px;
+                padding: 15px 10px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-nav-container {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 3.5rem;
+            }
+            
+            .page-subtitle {
+                font-size: 1.8rem;
+            }
+            
+            .page-text {
+                font-size: 1.1rem;
+            }
+            
+            .romantic-text {
+                font-size: 2rem;
+            }
+            
+            .love-timeline::before {
+                left: 50%;
+            }
+            
+            .timeline-moment {
+                width: 45%;
+            }
+            
+            .timeline-moment:nth-child(odd) {
+                left: 0;
+            }
+            
+            .timeline-moment:nth-child(even) {
+                left: 55%;
+            }
+            
+            .timeline-moment:nth-child(odd) .timeline-heart {
+                left: auto;
+                right: -55px;
+            }
+            
+            .timeline-moment:nth-child(even) .timeline-heart {
+                left: -55px;
+            }
+            
+            .proposal-question {
+                font-size: 3.5rem;
+            }
+            
+            .magic-carousel {
+                max-width: 600px;
+            }
+            
+            .carousel-slide {
+                height: 350px;
+            }
+            
+            .mobile-nav-btn {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+            }
+            
+            /* 求婚页面按钮在桌面端水平排列 */
+            .proposal-buttons-container {
+                flex-direction: row;
+                min-height: 120px;
+            }
+            
+            /* 新增页面标题在桌面端的调整 */
+            .page-title {
+                min-height: 150px;
+                padding: 30px 10px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .page-title {
+                font-size: 4rem;
+            }
+            
+            .page-content {
+                max-width: 1000px;
+                padding: 40px 30px;
+            }
+        }
+        
+        /* 小屏幕手机特别优化 */
+        @media (max-width: 380px) {
+            .page-title {
+                font-size: 2.2rem;
+            }
+            
+            .page-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .page-text {
+                font-size: 0.95rem;
+            }
+            
+            .romantic-text {
+                font-size: 1.4rem;
+            }
+            
+            .magic-token {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+            
+            .carousel-slide {
+                height: 250px;
+            }
+            
+            .proposal-question {
+                font-size: 2.2rem;
+            }
+            
+            .ring-sanctuary {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .diamond-sanctuary {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .photo-frame {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .proposal-buttons-container {
+                min-height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 高级星空背景 -->
+    <div class="cosmic-background" id="cosmicBackground"></div>
+    <div class="constellation" id="constellation"></div>
+    <div class="aurora"></div>
+    <div class="magic-particles" id="magicParticles"></div>
+    
+    <!-- 烟花特效容器 -->
+    <div class="fireworks-container" id="fireworksContainer"></div>
+    
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- 手机端导航 -->
+    <div class="mobile-nav-container">
+        <button class="mobile-nav-btn" id="mobilePrevBtn">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+        <button class="mobile-nav-btn" id="mobileNextBtn">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <button class="mobile-nav-btn" id="mobileHeartsBtn">
+            <i class="fas fa-heart"></i>
+        </button>
+    </div>
+    
+    <!-- 手机端手势提示 -->
+    <div class="swipe-hint" id="swipeHint">
+        <i class="fas fa-hand-point-up"></i>
+        <span>上下滑动切换页面</span>
+    </div>
+    
+    <!-- 桌面导航 -->
+    <div class="nav-container">
+        <button class="nav-btn" id="prevBtn">
+            <i class="fas fa-chevron-up"></i>
+            <span class="nav-tooltip">上一页</span>
+        </button>
+        <button class="nav-btn" id="nextBtn">
+            <i class="fas fa-chevron-down"></i>
+            <span class="nav-tooltip">下一页</span>
+        </button>
+        <button class="nav-btn" id="musicToggle">
+            <i class="fas fa-music"></i>
+            <span class="nav-tooltip">音乐</span>
+        </button>
+        <button class="nav-btn" id="heartsBtn">
+            <i class="fas fa-heart"></i>
+            <span class="nav-tooltip">爱心雨</span>
+        </button>
+    </div>
+    
+    <!-- 进度指示器 -->
+    <div class="progress-indicator" id="progressIndicator">
+        <div class="progress-dot active" data-page="0"></div>
+        <div class="progress-dot" data-page="1"></div>
+        <div class="progress-dot" data-page="2"></div>
+        <div class="progress-dot" data-page="3"></div>
+        <div class="progress-dot" data-page="4"></div>
+        <div class="progress-dot" data-page="5"></div>
+        <div class="progress-dot" data-page="6"></div>
+        <div class="progress-dot" data-page="7"></div>
+        <div class="progress-dot" data-page="8"></div>
+    </div>
+    
+    <!-- 音乐播放器 -->
+    <div class="music-player" id="musicPlayer">
+        <button class="music-control" id="playBtn">
+            <i class="fas fa-play"></i>
+        </button>
+        <div class="music-info">You raise me up</div>
+        <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
+        <audio id="bgMusic" loop preload="metadata">
+            <source src="/qh/M80000433DrP4D7ijF.mp3" type="audio/mpeg">
+            您的浏览器不支持音频元素。
+        </audio>
+    </div>
+    
+    <!-- 页面容器 -->
+    <div class="page-container" id="pageContainer">
+        <!-- 新增页面1：弹跳文字效果 -->
+        <div class="page active" id="page0">
+            <div class="page-content">
+                <div class="page-top">
+                    <i class="fas fa-heart"></i> 第一页：爱的开始
+                </div>
+                <h1 class="page-title bounce-text">遇见你，是我最美的意外</h1>
+                <div class="page-bottom">
+                    <i class="fas fa-chevron-down"></i> 滑动到底部进入下一页
+                </div>
+            </div>
+        </div>
+        
+        <!-- 新增页面2：百叶窗文字效果 -->
+        <div class="page" id="page1">
+            <div class="page-content">
+                <div class="page-top">
+                    <i class="fas fa-heart"></i> 第二页：心动的感觉
+                </div>
+                <h1 class="page-title blinds-text">你是我眼中最亮的光</h1>
+                <div class="page-bottom">
+                    <i class="fas fa-chevron-down"></i> 滑动到底部进入下一页
+                </div>
+            </div>
+        </div>
+        
+        <!-- 新增页面3：溶解文字效果 -->
+        <div class="page" id="page2">
+            <div class="page-content">
+                <div class="page-top">
+                    <i class="fas fa-heart"></i> 第三页：深情的告白
+                </div>
+                <h1 class="page-title dissolve-text">爱你，是我做过最正确的事</h1>
+                <div class="page-bottom">
+                    <i class="fas fa-chevron-down"></i> 滑动到底部进入下一页
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页面4：魔法开场 -->
+        <div class="page" id="page3">
+            <div class="page-content">
+                <div class="page-top">
+                    <i class="fas fa-heart"></i> 第四页：魔法开场
+                </div>
+                <h1 class="page-title">找到你，是我最伟大的成功</h1>
+                <p class="page-subtitle">遇见你后，我才看见我</p>
+                
+                <p class="page-text">今天是2026年2月1日, 我们在一起两年了, </p>
+                <p class="page-text">在这里，每一颗星星都诉说着我对你的爱，每一缕光芒都代表着我的思念。</p>
+                
+                <div class="romantic-text">"在亿万星辰中，我只看见你的光芒"</div>
+                
+                <div class="magic-tokens">
+                    <div class="magic-token" data-token="heart">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="magic-token" data-token="star">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="magic-token" data-token="magic">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="magic-token" data-token="crown">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                </div>
+                
+                <p class="page-text">请点击上方的魔法信物，它们会为你带来惊喜。</p>
+                <p class="page-text">当你准备好时，让我们开始这段旅程。</p>
+                
+                <button class="romantic-btn" id="startJourneyBtn">
+                    <i class="fas fa-fairy-wand"></i> 开启魔法之旅
+                </button>
+                
+                <div class="page-bottom">
+                    <i class="fas fa-chevron-down"></i> 滑动到底部进入下一页
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页面5：爱情时间轴 -->
+        <div class="page" id="page4">
+            <div class="page-content">
+                <div class="page-top">
+                    <i class="fas fa-heart"></i> 第五页：爱情时间轴
+                </div>
+                <h1 class="page-title">我们的爱情编年史</h1>
+                <p class="page-subtitle">每一刻都值得永远珍藏</p>
+                
+                <div class="love-timeline">
+                    <div class="timeline-moment visible">
+                        <div class="timeline-heart">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar-alt"></i> 第一次相遇
+                            </div>
+                            <p>那天你穿着淡蓝色的裙子，阳光洒在你的发梢。你说你好，我就知道，我的世界从此不同了。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-moment">
+                        <div class="timeline-heart">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar-alt"></i> 第一次约会
+                            </div>
+                            <p>在海边的小咖啡馆，我们聊了整整一个下午。海浪的声音，咖啡的香气，还有你眼中的光芒。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-moment">
+                        <div class="timeline-heart">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar-alt"></i> 第一次旅行
+                            </div>
+                            <p>在山顶等待日出时，你靠在我的肩上。当第一缕阳光出现，你转过头对我微笑，那一刻我看到了永恒。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-moment">
+                        <div class="timeline-heart">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar-alt"></i> 无数个日常
+                            </div>
+                            <p>早晨的咖啡，午后的散步，夜晚的拥抱。这些平凡的瞬间，因为有你而变得无比珍贵。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="romantic-text">"爱不是时间的长度，而是瞬间的永恒"</div>
+                
+                <button class="romantic-btn" id="continueJourneyBtn">
+                    继续我们的故事 <i class="fas fa-arrow-right"></i>
+                </button>
+                
+                <div class="page-bottom">
+                    <i class="fas fa-chevron-down"></i> 滑动到底部进入下一页
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页面6：回忆画廊 -->
+        <div class="page" id="page5">
+            <div class="page-content">
+                <div class="page-top">
+                    <i class="fas fa-heart"></i> 第六页：回忆画廊
+                </div>
+                <h1 class="page-title">时光的记忆画廊</h1>
+                <p class="page-subtitle">让美好瞬间在此永恒定格</p>
+                
+                <p class="page-text">我收集了我们在一起的珍贵时刻，每一张照片都记录着我们的爱情故事。</p>
+                <p class="page-text">左右滑动或点击箭头切换照片，点击照片会有魔法发生哦~</p>
+                
+                <div class="magic-carousel" id="magicCarousel">
+                    <div class="carousel-container" id="carouselContainer">
+                        <div class="carousel-slide active">
+                            <img src="./pic/微信图片_20260126162103_212_3.jpg" alt="我们的回忆" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pic/微信图片_20260126162104_213_3.jpg" alt="美好时刻" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pic/微信图片_20260126162105_214_3.jpg" alt="浪漫场景" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pic/微信图片_20260126162103_212_3.jpg" alt="爱情" loading="lazy">
+                        </div>
+                    </div>
+                    <button class="carousel-nav prev" id="carouselPrev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-nav next" id="carouselNext">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="carousel-dots" id="carouselDots">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+                
+                <div class="romantic-text">"每一帧回忆，都是我爱你的证明"</div>
+                
+                <button class="romantic-btn" id="nextPageBtn">
+                    进入下一篇章 <i class="fas fa-feather-alt"></i>
+                </button>
+                
+                <div class="page-bottom">
+                    <i class="fas fa-chevron-down"></i> 滑动到底部进入下一页
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页面7：爱情誓言 -->
+        <div class="page" id="page6">
+            <div class="page-content">
+                <div class="page-top">
+                    <i class="fas fa-heart"></i> 第七页：爱情誓言
+                </div>
+                <h1 class="page-title">永恒的爱情誓言</h1>
+                <p class="page-subtitle">我对你的承诺，写在星辰之间</p>
+                
+                <div class="love-vow">
+                    <div class="vow-title">致我最爱的 <span id="girlfriendName">"CLL"</span></div>
+                    
+                    <p class="vow-text">从遇见你的那一刻起，我的世界开始有了不同的意义。</p>
+                    <p class="vow-text">我承诺，在每一个清晨醒来时，第一个想到的是你。</p>
+                    <p class="vow-text">我承诺，在每一个艰难时刻，都会紧握你的手，与你并肩前行。</p>
+                    <p class="vow-text">我承诺，在每一个快乐瞬间，都会与你分享，让幸福加倍。</p>
+                    <p class="vow-text">我承诺，无论顺境逆境，无论健康疾病，都会爱你、尊重你、珍惜你。</p>
+                    <p class="vow-text">我承诺，用我余生的每一天，让你感受到被爱的温暖。</p>
+                    
+                    <div class="romantic-text" style="margin-top: 30px;">"直到时间的尽头，我都是你的"</div>
+                </div>
+                
+                <div class="magic-video-container">
+                    <video id="memoryVideo" width="100%" controls preload="metadata" poster="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-couple-looking-at-the-sunset-32-large.mp4" type="video/mp4">
+                        您的浏览器不支持视频标签。
+                    </video>
+                </div>
+                
+                <button class="romantic-btn" id="toProposalBtn">
+                    前往最终约定 <i class="fas fa-gem"></i>
+                </button>
+                
+                <div class="page-bottom">
+                    <i class="fas fa-chevron-down"></i> 滑动到底部进入下一页
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页面8：求婚殿堂 -->
+        <div class="page" id="page7">
+            <div class="page-content">
+                <div class="proposal-sanctuary">
+                    <div class="page-top">
+                        <i class="fas fa-heart"></i> 第八页：求婚殿堂
+                    </div>
+                    <h1 class="page-title">星空下的永恒之约</h1>
+                    <p class="page-subtitle">我一生中最重要的问题</p>
+                    
+                    <p class="page-text">亲爱的，我们走过了这么多美好的时光，一起创造了无数珍贵的回忆。</p>
+                    <p class="page-text">你让我的生命变得完整，让我的世界充满色彩。</p>
+                    <p class="page-text">和你在一起的每一天，我都感到无比幸福和感恩。</p>
+                    
+                    <div class="ring-sanctuary">
+                        <div class="magic-ring"></div>
+                        <div class="magic-ring"></div>
+                        <div class="magic-ring"></div>
+                        <div class="diamond-sanctuary">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="proposal-question">你愿意嫁给我吗？</div>
+                    
+                    <p class="page-text">我承诺用我余生的每一天来爱你、珍惜你、尊重你，与你一起建造我们梦想中的未来。</p>
+                    
+                    <div class="proposal-buttons-container">
+                        <button class="romantic-btn" id="yesBtn" style="background: linear-gradient(135deg, #ff6b9d, #ff9ec0);">
+                            <i class="fas fa-heart"></i> 我愿意！
+                        </button>
+                        <button class="romantic-btn runaway-btn" id="noBtn" style="background: linear-gradient(135deg, #ff4757, #ff3838); position: absolute;">
+                            <i class="fas fa-heart-broken"></i> 再考虑一下
+                        </button>
+                        <button class="romantic-btn" id="absolutelyBtn" style="background: linear-gradient(135deg, #00d4ff, #6a5af9);">
+                            <i class="fas fa-star"></i> 当然愿意！
+                        </button>
+                    </div>
+                    
+                    <div class="page-bottom" style="margin-top: 30px;">
+                        <i class="fas fa-chevron-down"></i> 滑动到底部进入下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页面9：感谢页面 -->
+        <div class="page" id="page8">
+            <div class="page-content">
+                <div class="final-page-content">
+                    <div class="page-top">
+                        <i class="fas fa-heart"></i> 第九页：感谢与未来
+                    </div>
+                    <h1 class="page-title">感谢你的回答</h1>
+                    <p class="page-subtitle">我们的故事才刚刚开始</p>
+                    
+                    <!-- 图片展示区域 -->
+                    <div class="photo-frame">
+                        <img src="./pic/微信图片_20260126162104_213_3.jpg" alt="我们的回忆" id="finalPhoto" loading="lazy">
+                    </div>
+                    
+                    <!-- 表达文字 -->
+                    <div class="final-message">
+                        <p>谢谢你让我的梦想成真，谢谢你愿意和我共度余生。</p>
+                        <p>从今天起，我们将一起书写属于我们的新篇章。</p>
+                        <p class="romantic-text" style="font-size: 1.6rem; margin: 20px 0;">"永远爱你，我的未婚妻"</p>
+                        <p>这个网页将永远保存，作为我们爱情的见证。</p>
+                        <p>你可以随时回到这里，重温这个特别的时刻。</p>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 40px; flex-wrap: wrap;">
+                        <button class="romantic-btn" id="restartBtn" style="background: var(--gold-gradient); color: #333;">
+                            <i class="fas fa-redo"></i> 重新体验
+                        </button>
+                        <button class="romantic-btn" id="fireworksBtn" style="background: linear-gradient(135deg, #00d4ff, #6a5af9);">
+                            <i class="fas fa-fire"></i> 放烟花庆祝
+                        </button>
+                        <button class="romantic-btn" id="shareBtn" style="background: linear-gradient(135deg, #ff6b9d, #ff9ec0);">
+                            <i class="fas fa-share-alt"></i> 分享幸福
+                        </button>
+                    </div>
+                    
+                    <div class="page-bottom" style="margin-top: 30px;">
+                        <i class="fas fa-heart"></i> 已经到达最后一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 防抖函数 - 性能优化
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // 节流函数 - 性能优化
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            };
+        }
+        
+        // 初始化变量
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
+        const totalPages = pages.length;
+        let isMusicPlaying = false;
+        let isCreatingHearts = false;
+        let magicParticles = [];
+        let lastTouchY = 0;
+        let isScrolling = false;
+        let canSwipe = true;
+        let pageScrollTimeout;
+        let lastPageSwitch = Date.now();
+        
+        // 轮播图变量
+        let currentSlide = 0;
+        let carouselSlides = [];
+        let carouselDots = [];
+        let carouselContainer;
+        let isDragging = false;
+        let startPosition = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID = 0;
+        
+        // 逃跑按钮变量
+        let noBtn;
+        let isRunningAway = false;
+        let runAwayTimeout;
+        
+        // 烟花变量
+        let fireworksActive = false;
+        
+        // 设备检测
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        
+        // 创建高级星空背景 - 优化性能
+        function createCosmicBackground() {
+            const cosmicBackground = document.getElementById('cosmicBackground');
+            const starLayers = isMobile ? 2 : 3;
+            
+            // 移动端减少星星数量优化性能
+            const starCounts = isMobile ? [20, 35] : [30, 50, 70];
+            
+            for (let layer = 0; layer < starLayers; layer++) {
+                const starLayer = document.createElement('div');
+                starLayer.classList.add('star-layer');
+                
+                for (let i = 0; i < starCounts[layer]; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    
+                    let size;
+                    if (layer === 0) {
+                        size = Math.random() * 1.5 + 0.8;
+                    } else if (layer === 1) {
+                        size = Math.random() * 1 + 0.5;
+                    } else {
+                        size = Math.random() * 0.8 + 0.3;
+                    }
+                    
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    
+                    star.style.left = `${Math.random() * 100}vw`;
+                    star.style.top = `${Math.random() * 100}vh`;
+                    
+                    const duration = layer === 0 ? Math.random() * 6 + 4 : 
+                                    layer === 1 ? Math.random() * 5 + 3 : 
+                                    Math.random() * 4 + 2;
+                    star.style.setProperty('--duration', `${duration}s`);
+                    
+                    starLayer.appendChild(star);
+                }
+                
+                cosmicBackground.appendChild(starLayer);
+            }
+        }
+        
+        // 创建魔法粒子 - 优化性能
+        function createMagicParticles() {
+            const magicParticlesContainer = document.getElementById('magicParticles');
+            // 移动端减少粒子数量优化性能
+            const particleCount = isMobile ? 8 : 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('magic-particle');
+                
+                const size = Math.random() * (isMobile ? 4 : 6) + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                magicParticlesContainer.appendChild(particle);
+                magicParticles.push({
+                    element: particle,
+                    x: parseFloat(particle.style.left),
+                    y: parseFloat(particle.style.top),
+                    speedX: (Math.random() - 0.5) * 0.3,
+                    speedY: (Math.random() - 0.5) * 0.3,
+                    opacity: 0
+                });
+                
+                // 错开粒子动画开始时间
+                setTimeout(() => {
+                    animateMagicParticle(magicParticles[i]);
+                }, Math.random() * 5000);
+            }
+        }
+        
+        // 动画魔法粒子 - 优化性能
+        function animateMagicParticle(particle) {
+            let opacity = 0;
+            let increasing = true;
+            
+            function updateParticle() {
+                if (!particle.element.parentNode) return;
+                
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+                
+                if (particle.x < 0 || particle.x > 100) particle.speedX *= -1;
+                if (particle.y < 0 || particle.y > 100) particle.speedY *= -1;
+                
+                particle.element.style.left = `${particle.x}vw`;
+                particle.element.style.top = `${particle.y}vh`;
+                
+                if (increasing) {
+                    opacity += 0.01;
+                    if (opacity >= 0.7) increasing = false;
+                } else {
+                    opacity -= 0.01;
+                    if (opacity <= 0) increasing = true;
+                }
+                
+                particle.element.style.opacity = opacity;
+                
+                requestAnimationFrame(updateParticle);
+            }
+            
+            updateParticle();
+        }
+        
+        // 初始化轮播图
+        function initCarousel() {
+            carouselContainer = document.getElementById('carouselContainer');
+            carouselSlides = document.querySelectorAll('.carousel-slide');
+            const carouselDotsContainer = document.getElementById('carouselDots');
+            
+            // 创建指示点
+            carouselSlides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                carouselDotsContainer.appendChild(dot);
+                carouselDots.push(dot);
+            });
+            
+            // 初始化轮播图导航
+            document.getElementById('carouselPrev').addEventListener('click', () => {
+                goToSlide(currentSlide - 1);
+            });
+            
+            document.getElementById('carouselNext').addEventListener('click', () => {
+                goToSlide(currentSlide + 1);
+            });
+            
+            // 添加触摸事件 - 使用被动事件监听器优化性能
+            carouselContainer.addEventListener('touchstart', touchStart, { passive: true });
+            carouselContainer.addEventListener('touchmove', touchMove, { passive: true });
+            carouselContainer.addEventListener('touchend', touchEnd, { passive: true });
+            
+            // 添加图片点击事件
+            carouselSlides.forEach(slide => {
+                slide.addEventListener('click', function() {
+                    if (!isDragging) {
+                        createPhotoClickEffect(this);
+                        createSparkleBurst(isMobile ? 5 : 8);
+                    }
+                });
+            });
+            
+            // 自动轮播
+            let carouselInterval = setInterval(() => {
+                if (currentPage === 5 && !isDragging) {
+                    goToSlide(currentSlide + 1);
+                }
+            }, 5000);
+            
+            // 页面离开时清除定时器
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    clearInterval(carouselInterval);
+                } else {
+                    carouselInterval = setInterval(() => {
+                        if (currentPage === 5 && !isDragging) {
+                            goToSlide(currentSlide + 1);
+                        }
+                    }, 5000);
+                }
+            });
+        }
+        
+        // 轮播图触摸事件
+        function touchStart(event) {
+            startPosition = getPositionX(event);
+            isDragging = true;
+        }
+        
+        function touchMove(event) {
+            if (isDragging) {
+                const currentPosition = getPositionX(event);
+                currentTranslate = prevTranslate + currentPosition - startPosition;
+                carouselContainer.style.transform = `translateX(${currentTranslate}px)`;
+            }
+        }
+        
+        function touchEnd() {
+            isDragging = false;
+            
+            const movedBy = currentTranslate - prevTranslate;
+            
+            if (movedBy < -50 && currentSlide < carouselSlides.length - 1) {
+                goToSlide(currentSlide + 1);
+            } else if (movedBy > 50 && currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            } else {
+                setPositionByIndex();
+            }
+        }
+        
+        // 轮播图辅助函数
+        function getPositionX(event) {
+            return event.touches[0].clientX;
+        }
+        
+        function setPositionByIndex() {
+            currentTranslate = currentSlide * -carouselSlides[0].offsetWidth;
+            prevTranslate = currentTranslate;
+            carouselContainer.style.transform = `translateX(${currentTranslate}px)`;
+        }
+        
+        function goToSlide(index) {
+            if (index < 0) index = carouselSlides.length - 1;
+            if (index >= carouselSlides.length) index = 0;
+            
+            currentSlide = index;
+            setPositionByIndex();
+            
+            // 更新活动状态
+            carouselSlides.forEach((slide, i) => {
+                if (i === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            // 更新指示点
+            carouselDots.forEach((dot, i) => {
+                if (i === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            // 添加切换效果
+            createSlideTransitionEffect();
+        }
+        
+        function createSlideTransitionEffect() {
+            createSparkleBurst(isMobile ? 3 : 5);
+        }
+        
+        // 页面切换功能 - 优化防抖
+        function goToPage(pageIndex) {
+            if (pageIndex < 0 || pageIndex >= totalPages) return;
+            
+            // 添加防抖，防止快速切换
+            if (Date.now() - lastPageSwitch < 800) return;
+            lastPageSwitch = Date.now();
+            
+            if (isMobile && 'vibrate' in navigator) {
+                navigator.vibrate(20);
+            }
+            
+            // 隐藏当前页面
+            pages[currentPage].classList.remove('active');
+            document.querySelectorAll('.progress-dot')[currentPage].classList.remove('active');
+            
+            // 显示目标页面
+            currentPage = pageIndex;
+            pages[currentPage].classList.add('active');
+            document.querySelectorAll('.progress-dot')[currentPage].classList.add('active');
+            
+            // 滚动到页面顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            updateBackToTopButton();
+            
+            // 防止滑动冲突
+            canSwipe = false;
+            setTimeout(() => {
+                canSwipe = true;
+            }, 800);
+            
+            // 触发页面进入效果
+            triggerPageEntranceEffects();
+            
+            // 特定页面的特殊效果
+            if (currentPage === 7) {
+                setTimeout(() => {
+                    initRunawayButton();
+                    startProposalEffects();
+                }, 300);
+            } else if (currentPage === 8) {
+                startCelebrationEffects();
+                setTimeout(() => {
+                    createFireworks(12);
+                }, 1000);
+            }
+            
+            // 隐藏手势提示
+            const swipeHint = document.getElementById('swipeHint');
+            if (swipeHint.style.display !== 'none') {
+                swipeHint.style.opacity = '0';
+                setTimeout(() => {
+                    swipeHint.style.display = 'none';
+                }, 300);
+            }
+        }
+        
+        // 检查是否可以切换页面 - 优化检测逻辑
+        function canGoToNextPage() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // 检查是否滚动到页面底部（预留100px缓冲）
+            return (scrollTop + windowHeight) >= (documentHeight - 100);
+        }
+        
+        function canGoToPrevPage() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            
+            // 检查是否滚动到页面顶部（预留50px缓冲）
+            return scrollTop <= 50;
+        }
+        
+        // 更新返回顶部按钮
+        function updateBackToTopButton() {
+            const backToTop = document.getElementById('backToTop');
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            
+            if (scrollTop > 200) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        }
+        
+        // 触发页面进入效果
+        function triggerPageEntranceEffects() {
+            // 新增页面的文字动画效果
+            if (currentPage >= 0 && currentPage <= 2) {
+                // 前三页的文字动画效果
+                const title = pages[currentPage].querySelector('.page-title');
+                if (title) {
+                    // 重置动画
+                    title.style.animation = 'none';
+                    void title.offsetWidth; // 触发重排
+                    
+                    // 应用对应动画
+                    if (currentPage === 0) {
+                        title.style.animation = 'bounceIn 1.5s ease-out forwards';
+                    } else if (currentPage === 1) {
+                        title.style.animation = 'blindsOpen 2s ease-out forwards';
+                    } else if (currentPage === 2) {
+                        title.style.animation = 'dissolveIn 2s ease-out forwards';
+                    }
+                }
+            }
+            
+            // 原时间轴页面的动画
+            if (currentPage === 4) {
+                const timelineMoments = document.querySelectorAll('.timeline-moment');
+                timelineMoments.forEach((moment, index) => {
+                    setTimeout(() => {
+                        moment.classList.add('visible');
+                    }, index * 300);
+                });
+            }
+            
+            // 轮播图页面
+            if (currentPage === 5) {
+                // 初始化轮播图
+                setTimeout(() => {
+                    if (!carouselContainer) {
+                        initCarousel();
+                    }
+                }, 300);
+            }
+            
+            // 创建页面进入魔法效果
+            if (currentPage > 2) {
+                createPageEntranceMagic();
+            }
+        }
+        
+        function createPageEntranceMagic() {
+            createSparkleBurst(isMobile ? 8 : 12);
+        }
+        
+        // 初始化逃跑按钮
+        function initRunawayButton() {
+            noBtn = document.getElementById('noBtn');
+            if (!noBtn) return;
+            
+            // 设置初始位置
+            const container = document.querySelector('.proposal-buttons-container');
+            
+            // 初始位置在容器中间
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = '50%';
+            noBtn.style.top = '50%';
+            noBtn.style.transform = 'translate(-50%, -50%)';
+            
+            // 添加事件监听
+            noBtn.addEventListener('mouseenter', makeButtonRunAway);
+            noBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                makeButtonRunAway();
+            }, { passive: false });
+            
+            // 点击事件
+            noBtn.addEventListener('click', (e) => {
+                if (isRunningAway) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                
+                // 如果成功点击到，显示消息
+                alert("哈哈，你居然点到了！不过我已经知道你的真实答案了~ 💖");
+                createHearts(isMobile ? 15 : 20);
+                return false;
+            });
+        }
+        
+        // 按钮逃跑功能
+        function makeButtonRunAway() {
+            if (isRunningAway || currentPage !== 7) return;
+            
+            isRunningAway = true;
+            clearTimeout(runAwayTimeout);
+            
+            const container = document.querySelector('.proposal-buttons-container');
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // 计算安全区域（不跑出容器）
+            const safePadding = 10;
+            const maxX = containerRect.width - btnRect.width - safePadding;
+            const maxY = containerRect.height - btnRect.height - safePadding;
+            
+            // 随机新位置
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            
+            // 动画移动到新位置
+            noBtn.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
+            noBtn.style.transform = 'translate(0, 0)';
+            
+            // 创建逃跑轨迹效果
+            createRunawayEffect();
+            
+            // 3秒后重置按钮位置
+            runAwayTimeout = setTimeout(() => {
+                if (currentPage === 7 && noBtn) {
+                    noBtn.style.left = '50%';
+                    noBtn.style.top = '50%';
+                    noBtn.style.transform = 'translate(-50%, -50%)';
+                    
+                    // 1秒后恢复可点击状态
+                    setTimeout(() => {
+                        isRunningAway = false;
+                    }, 400);
+                }
+            }, 3000);
+        }
+        
+        function createRunawayEffect() {
+            // 创建逃跑轨迹效果
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const trail = document.createElement('div');
+                    trail.style.position = 'absolute';
+                    trail.style.width = '6px';
+                    trail.style.height = '6px';
+                    trail.style.background = '#ff4757';
+                    trail.style.borderRadius = '50%';
+                    trail.style.left = noBtn.style.left;
+                    trail.style.top = noBtn.style.top;
+                    trail.style.transform = 'translate(-50%, -50%)';
+                    trail.style.zIndex = '4';
+                    trail.style.pointerEvents = 'none';
+                    trail.style.opacity = '0.7';
+                    
+                    noBtn.parentElement.appendChild(trail);
+                    
+                    // 淡出动画
+                    const animation = trail.animate([
+                        { opacity: 0.7, transform: 'translate(-50%, -50%) scale(1)' },
+                        { opacity: 0, transform: 'translate(-50%, -50%) scale(0)' }
+                    ], {
+                        duration: 500,
+                        easing: 'ease-out'
+                    });
+                    
+                    animation.onfinish = () => {
+                        if (trail.parentNode) {
+                            trail.remove();
+                        }
+                    };
+                }, i * 100);
+            }
+        }
+        
+        // 优化烟花特效 - 减少同时存在的粒子数量
+        function createFireworks(count = 10) {
+            if (fireworksActive) return;
+            
+            fireworksActive = true;
+            const container = document.getElementById('fireworksContainer');
+            
+            const colors = [
+                '#ff6b9d', '#ff9ec0', '#ff4757', 
+                '#6a5af9', '#00d4ff', '#ffd700'
+            ];
+            
+            let fireworksCreated = 0;
+            
+            function createNextFirework() {
+                if (fireworksCreated >= count) {
+                    setTimeout(() => {
+                        fireworksActive = false;
+                    }, 2000);
+                    return;
+                }
+                
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight * 0.7;
+                createFireworkExplosion(x, y, colors[Math.floor(Math.random() * colors.length)]);
+                
+                fireworksCreated++;
+                
+                if (fireworksCreated < count) {
+                    setTimeout(createNextFirework, 400); // 增加间隔时间
+                }
+            }
+            
+            createNextFirework();
+        }
+        
+        function createFireworkExplosion(x, y, color) {
+            const container = document.getElementById('fireworksContainer');
+            // 减少粒子数量优化性能
+            const particleCount = 40;
+            
+            // 创建上升轨迹
+            const trail = document.createElement('div');
+            trail.style.position = 'absolute';
+            trail.style.left = `${x}px`;
+            trail.style.top = `${window.innerHeight}px`;
+            trail.style.width = '3px';
+            trail.style.height = '0';
+            trail.style.backgroundColor = color;
+            trail.style.borderRadius = '2px';
+            trail.style.boxShadow = `0 0 10px ${color}`;
+            trail.style.opacity = '0.9';
+            container.appendChild(trail);
+            
+            // 上升动画
+            const trailAnimation = trail.animate([
+                { top: `${window.innerHeight}px`, height: '0', opacity: 1 },
+                { top: `${y}px`, height: '40px', opacity: 0 }
+            ], {
+                duration: 600,
+                easing: 'ease-out'
+            });
+            
+            trailAnimation.onfinish = () => {
+                trail.remove();
+                
+                // 创建爆炸效果
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('firework-particle');
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    
+                    const size = Math.random() * 4 + 2;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    const particleColor = Math.random() < 0.8 ? color : 
+                        ['#ffffff', '#ffd700', '#00d4ff'][Math.floor(Math.random() * 3)];
+                    
+                    particle.style.backgroundColor = particleColor;
+                    particle.style.borderRadius = '50%';
+                    particle.style.boxShadow = `0 0 15px ${particleColor}`;
+                    particle.style.opacity = '0';
+                    container.appendChild(particle);
+                    
+                    const angle = (Math.PI * 2 * i) / particleCount;
+                    const speed = Math.random() * 2 + 1.5;
+                    const distance = Math.random() * 120 + 80;
+                    
+                    const animation = particle.animate([
+                        { 
+                            opacity: 0, 
+                            transform: 'translate(0, 0) scale(0)'
+                        },
+                        { 
+                            opacity: 1, 
+                            transform: 'translate(0, 0) scale(1)'
+                        },
+                        { 
+                            opacity: 0, 
+                            transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`
+                        }
+                    ], {
+                        duration: 1500 + Math.random() * 500,
+                        easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+                    });
+                    
+                    animation.onfinish = () => {
+                        if (particle.parentNode) {
+                            particle.remove();
+                        }
+                    };
+                }
+            };
+        }
+        
+        // 初始化导航 - 使用事件委托优化性能
+        function initNavigation() {
+            // 桌面导航按钮
+            document.getElementById('prevBtn').addEventListener('click', () => {
+                goToPage(currentPage - 1);
+            });
+            
+            document.getElementById('nextBtn').addEventListener('click', () => {
+                goToPage(currentPage + 1);
+            });
+            
+            // 手机导航按钮
+            document.getElementById('mobilePrevBtn').addEventListener('click', () => {
+                goToPage(currentPage - 1);
+            });
+            
+            document.getElementById('mobileNextBtn').addEventListener('click', () => {
+                goToPage(currentPage + 1);
+            });
+            
+            // 返回顶部按钮
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // 爱心雨按钮
+            document.getElementById('heartsBtn').addEventListener('click', () => {
+                createHearts(isMobile ? 20 : 30);
+            });
+            
+            document.getElementById('mobileHeartsBtn').addEventListener('click', () => {
+                createHearts(isMobile ? 20 : 30);
+            });
+            
+            // 使用事件委托处理进度指示器点击
+            document.getElementById('progressIndicator').addEventListener('click', (e) => {
+                const dot = e.target.closest('.progress-dot');
+                if (dot) {
+                    const pageIndex = parseInt(dot.dataset.page);
+                    goToPage(pageIndex);
+                }
+            });
+            
+            // 键盘导航
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                    goToPage(currentPage + 1);
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    goToPage(currentPage - 1);
+                } else if (e.key === 'Home') {
+                    goToPage(0);
+                } else if (e.key === 'End') {
+                    goToPage(totalPages - 1);
+                } else if (e.key === 'ArrowLeft' && currentPage === 5) {
+                    goToSlide(currentSlide - 1);
+                } else if (e.key === 'ArrowRight' && currentPage === 5) {
+                    goToSlide(currentSlide + 1);
+                }
+            });
+            
+            // 鼠标滚轮导航 - 使用防抖优化性能
+            document.addEventListener('wheel', debounce((e) => {
+                if (!canSwipe) return;
+                
+                if (e.deltaY > 30 && currentPage < totalPages - 1 && canGoToNextPage()) {
+                    goToPage(currentPage + 1);
+                } else if (e.deltaY < -30 && currentPage > 0 && canGoToPrevPage()) {
+                    goToPage(currentPage - 1);
+                }
+            }, 300), { passive: true });
+            
+            // 触摸滑动导航 - 使用防抖优化性能
+            let touchStartY = 0;
+            let touchStartTime = 0;
+            
+            document.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                touchStartTime = Date.now();
+            }, { passive: true });
+            
+            document.addEventListener('touchend', debounce((e) => {
+                if (!canSwipe) return;
+                
+                const touchEndY = e.changedTouches[0].clientY;
+                const touchEndTime = Date.now();
+                const touchDuration = touchEndTime - touchStartTime;
+                const diffY = touchStartY - touchEndY;
+                
+                // 如果触摸时间太短，可能是点击而不是滑动
+                if (touchDuration < 100) return;
+                
+                // 如果滑动距离足够大，切换页面
+                if (Math.abs(diffY) > 50) {
+                    if (diffY > 0 && currentPage < totalPages - 1 && canGoToNextPage()) {
+                        goToPage(currentPage + 1);
+                    } else if (diffY < 0 && currentPage > 0 && canGoToPrevPage()) {
+                        goToPage(currentPage - 1);
+                    }
+                }
+            }, 300), { passive: true });
+            
+            // 滚动事件 - 使用节流优化性能
+            let scrollThrottleTimeout;
+            window.addEventListener('scroll', () => {
+                if (scrollThrottleTimeout) return;
+                
+                scrollThrottleTimeout = setTimeout(() => {
+                    updateBackToTopButton();
+                    
+                    // 页面滚动时重置canSwipe状态
+                    clearTimeout(pageScrollTimeout);
+                    canSwipe = false;
+                    pageScrollTimeout = setTimeout(() => {
+                        canSwipe = true;
+                    }, 300);
+                    
+                    scrollThrottleTimeout = null;
+                }, 100);
+            }, { passive: true });
+            
+            updateBackToTopButton();
+        }
+        
+        // 初始化音乐播放器
+        function initMusicPlayer() {
+            const bgMusic = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('playBtn');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const musicToggle = document.getElementById('musicToggle');
+            
+            bgMusic.volume = 0.7;
+            
+            playBtn.addEventListener('click', () => {
+                if (isMusicPlaying) {
+                    bgMusic.pause();
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                } else {
+                    bgMusic.play().catch(e => {
+                        console.log("自动播放被阻止");
+                    });
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+                isMusicPlaying = !isMusicPlaying;
+            });
+            
+            volumeSlider.addEventListener('input', () => {
+                bgMusic.volume = volumeSlider.value / 100;
+            });
+            
+            musicToggle.addEventListener('click', () => {
+                if (isMusicPlaying) {
+                    bgMusic.pause();
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                } else {
+                    bgMusic.play();
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+                isMusicPlaying = !isMusicPlaying;
+            });
+            
+            // 用户交互后自动播放音乐
+            let hasUserInteracted = false;
+            const startMusic = () => {
+                if (!hasUserInteracted && !isMusicPlaying) {
+                    bgMusic.play().then(() => {
+                        isMusicPlaying = true;
+                        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                        hasUserInteracted = true;
+                    }).catch(e => {
+                        console.log("音乐播放失败");
+                    });
+                }
+            };
+            
+            document.addEventListener('click', startMusic);
+            document.addEventListener('touchstart', startMusic, { passive: true });
+            
+            if (isIOS) {
+                bgMusic.volume = 0;
+                setTimeout(() => {
+                    bgMusic.volume = 0.7;
+                }, 100);
+            }
+        }
+        
+        // 初始化互动元素 - 使用事件委托优化性能
+        function initInteractiveElements() {
+            // 使用事件委托处理所有浪漫按钮点击
+            document.addEventListener('click', (e) => {
+                const btn = e.target.closest('.romantic-btn');
+                if (!btn) return;
+                
+                const btnId = btn.id;
+                
+                switch(btnId) {
+                    case 'startJourneyBtn':
+                        goToPage(4);
+                        createHearts(isMobile ? 12 : 18);
+                        break;
+                    case 'continueJourneyBtn':
+                        goToPage(5);
+                        createStars(isMobile ? 8 : 12);
+                        break;
+                    case 'nextPageBtn':
+                        goToPage(6);
+                        createSparkleBurst(isMobile ? 12 : 20);
+                        break;
+                    case 'toProposalBtn':
+                        goToPage(7);
+                        createHearts(isMobile ? 15 : 25);
+                        break;
+                    case 'yesBtn':
+                        alert("太棒了！我生命中最幸福的一天！我爱你！💖");
+                        createHearts(isMobile ? 60 : 120);
+                        createFireworks(15);
+                        setTimeout(() => {
+                            goToPage(8);
+                        }, 2000);
+                        break;
+                    case 'absolutelyBtn':
+                        alert("我就知道你会同意的！我保证会用一生来爱你、珍惜你！💕");
+                        createHearts(isMobile ? 80 : 150);
+                        createFireworks(20);
+                        setTimeout(() => {
+                            goToPage(8);
+                        }, 2000);
+                        break;
+                    case 'restartBtn':
+                        goToPage(0);
+                        createHearts(isMobile ? 15 : 25);
+                        break;
+                    case 'fireworksBtn':
+                        createFireworks(20);
+                        break;
+                    case 'shareBtn':
+                        if (navigator.share) {
+                            navigator.share({
+                                title: '我们的爱情故事',
+                                text: '这是CLL为我准备的特别礼物，记录了我们的爱情故事！',
+                                url: window.location.href,
+                            })
+                            .then(() => console.log('分享成功'))
+                            .catch((error) => console.log('分享失败', error));
+                        } else {
+                            alert('分享链接已复制到剪贴板！\n\n' + window.location.href);
+                            navigator.clipboard.writeText(window.location.href);
+                        }
+                        break;
+                }
+            });
+            
+            // 魔法信物点击事件
+            document.querySelectorAll('.magic-token').forEach(token => {
+                token.addEventListener('click', function() {
+                    const tokenType = this.getAttribute('data-token');
+                    
+                    switch(tokenType) {
+                        case 'heart':
+                            createHearts(isMobile ? 6 : 10);
+                            createHeartExplosion(this);
+                            break;
+                        case 'star':
+                            createStars(isMobile ? 5 : 8);
+                            createStarExplosion(this);
+                            break;
+                        case 'magic':
+                            createSparkleBurst(isMobile ? 8 : 15);
+                            createMagicExplosion(this);
+                            break;
+                        case 'crown':
+                            createCrownEffect(this);
+                            break;
+                    }
+                    
+                    this.style.transform = 'translateY(-8px) scale(1.1)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 500);
+                });
+            });
+            
+            const memoryVideo = document.getElementById('memoryVideo');
+            memoryVideo.addEventListener('play', () => {
+                createSparkleBurst(isMobile ? 8 : 12);
+            });
+            
+            // 页面点击效果
+            let clickTimeout;
+            document.addEventListener('click', (e) => {
+                if (!isCreatingHearts && e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
+                    clearTimeout(clickTimeout);
+                    clickTimeout = setTimeout(() => {
+                        createHeartAtPosition(e.clientX, e.clientY);
+                        createRippleEffect(e.clientX, e.clientY);
+                        
+                        if (Math.random() < 0.3) {
+                            const words = ['我爱你', '臭宝贝', '永远幸福', '999', '一辈子守护你','最重要的人'];
+                            createFloatingWords([words[Math.floor(Math.random() * words.length)]]);
+                        }
+                    }, 50);
+                }
+            });
+            
+            // 长按效果
+            let pressTimer;
+            document.addEventListener('touchstart', (e) => {
+                if (e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
+                    pressTimer = setTimeout(() => {
+                        createLongPressEffect(e.touches[0].clientX, e.touches[0].clientY);
+                    }, 800);
+                }
+            });
+            
+            document.addEventListener('touchend', () => {
+                clearTimeout(pressTimer);
+            });
+        }
+        
+        // 创建长按效果
+        function createLongPressEffect(x, y) {
+            createHearts(isMobile ? 8 : 12);
+            createSparkleBurst(isMobile ? 6 : 10);
+            
+            const ring = document.createElement('div');
+            ring.style.position = 'fixed';
+            ring.style.left = `${x}px`;
+            ring.style.top = `${y}px`;
+            ring.style.width = '0';
+            ring.style.height = '0';
+            ring.style.border = '3px solid rgba(255, 107, 157, 0.6)';
+            ring.style.borderRadius = '50%';
+            ring.style.transform = 'translate(-50%, -50%)';
+            ring.style.zIndex = '1000';
+            ring.style.pointerEvents = 'none';
+            
+            document.body.appendChild(ring);
+            
+            const animation = ring.animate([
+                { width: '0', height: '0', opacity: 1 },
+                { width: '150px', height: '150px', opacity: 0 }
+            ], {
+                duration: 1000,
+                easing: 'ease-out'
+            });
+            
+            animation.onfinish = () => {
+                ring.remove();
+            };
+        }
+        
+        // 创建照片点击效果
+        function createPhotoClickEffect(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const spark = document.createElement('div');
+                    spark.style.position = 'fixed';
+                    spark.style.left = `${centerX}px`;
+                    spark.style.top = `${centerY}px`;
+                    spark.style.width = '8px';
+                    spark.style.height = '8px';
+                    spark.style.background = 'white';
+                    spark.style.borderRadius = '50%';
+                    spark.style.boxShadow = '0 0 12px white';
+                    spark.style.opacity = '0';
+                    spark.style.zIndex = '1000';
+                    spark.style.pointerEvents = 'none';
+                    spark.style.transform = 'translate(-50%, -50%)';
+                    
+                    document.body.appendChild(spark);
+                    
+                    const angle = (Math.PI * 2 * i) / 5;
+                    const distance = 50;
+                    
+                    const animation = spark.animate([
+                        { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+                        { opacity: 0, transform: `translate(${Math.cos(angle) * distance - 50}px, ${Math.sin(angle) * distance - 50}px) scale(0)` }
+                    ], {
+                        duration: 800,
+                        easing: 'ease-out'
+                    });
+                    
+                    animation.onfinish = () => {
+                        spark.remove();
+                    };
+                }, i * 100);
+            }
+        }
+        
+        // 创建爱心
+        function createHeartAtPosition(x, y) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤';
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+            heart.style.fontSize = `${Math.random() * 1.2 + 0.8}rem`;
+            
+            document.body.appendChild(heart);
+            
+            const colors = ['#ff6b9d', '#ff9ec0', '#ff4757', '#ff3838', '#00d4ff', '#6a5af9'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.random() * 60 + 30;
+            
+            const animation = heart.animate([
+                { opacity: 1, transform: 'translate(0, 0) scale(0.5) rotate(0deg)' },
+                { opacity: 0.8, transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance - 60}px) scale(1) rotate(${Math.random() * 360}deg)` },
+                { opacity: 0, transform: `translate(${Math.cos(angle) * distance * 1.5}px, ${Math.sin(angle) * distance * 1.5 - 90}px) scale(0.5) rotate(${Math.random() * 720}deg)` }
+            ], {
+                duration: Math.random() * 1200 + 800,
+                easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+            });
+            
+            animation.onfinish = () => {
+                heart.remove();
+            };
+        }
+        
+        // 批量创建爱心 - 限制数量优化性能
+        function createHearts(count) {
+            if (isCreatingHearts) return;
+            
+            isCreatingHearts = true;
+            // 限制最大数量
+            const maxCount = isMobile ? 30 : 50;
+            count = Math.min(count, maxCount);
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    createHeartAtPosition(x, y);
+                }, i * 30);
+            }
+            
+            setTimeout(() => {
+                isCreatingHearts = false;
+            }, count * 30);
+        }
+        
+        // 创建星星 - 限制数量优化性能
+        function createStars(count) {
+            // 限制最大数量
+            const maxCount = isMobile ? 15 : 25;
+            count = Math.min(count, maxCount);
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    
+                    const size = Math.random() * 2.5 + 1.2;
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    
+                    star.style.left = `${Math.random() * 100}vw`;
+                    star.style.top = `${Math.random() * 100}vh`;
+                    
+                    const starLayers = document.querySelectorAll('.star-layer');
+                    if (starLayers.length > 0) {
+                        starLayers[0].appendChild(star);
+                    }
+                    
+                    setTimeout(() => {
+                        if (star.parentNode) {
+                            star.parentNode.removeChild(star);
+                        }
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+        
+        // 创建闪光爆发 - 限制数量优化性能
+        function createSparkleBurst(count) {
+            // 限制最大数量
+            const maxCount = isMobile ? 20 : 35;
+            count = Math.min(count, maxCount);
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.style.position = 'fixed';
+                    sparkle.style.width = '10px';
+                    sparkle.style.height = '10px';
+                    sparkle.style.backgroundColor = 'white';
+                    sparkle.style.borderRadius = '50%';
+                    sparkle.style.boxShadow = '0 0 10px 2px #00d4ff, 0 0 20px 4px #6a5af9';
+                    sparkle.style.left = `${Math.random() * 100}vw`;
+                    sparkle.style.top = `${Math.random() * 100}vh`;
+                    sparkle.style.opacity = '0';
+                    sparkle.style.zIndex = '1000';
+                    sparkle.style.pointerEvents = 'none';
+                    
+                    document.body.appendChild(sparkle);
+                    
+                    const animation = sparkle.animate([
+                        { opacity: 0, transform: 'scale(0) rotate(0deg)' },
+                        { opacity: 1, transform: 'scale(1) rotate(180deg)' },
+                        { opacity: 0, transform: 'scale(0) rotate(360deg)' }
+                    ], {
+                        duration: 1000,
+                        easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                    });
+                    
+                    animation.onfinish = () => {
+                        sparkle.remove();
+                    };
+                }, i * 50);
+            }
+        }
+        
+        // 创建爱心爆炸效果
+        function createHeartExplosion(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤';
+                    heart.style.position = 'fixed';
+                    heart.style.left = `${centerX}px`;
+                    heart.style.top = `${centerY}px`;
+                    heart.style.fontSize = '1.1rem';
+                    heart.style.color = '#ff6b9d';
+                    heart.style.zIndex = '1000';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.transform = 'translate(-50%, -50%)';
+                    
+                    document.body.appendChild(heart);
+                    
+                    const angle = (Math.PI * 2 * i) / 8;
+                    const distance = 50;
+                    
+                    const animation = heart.animate([
+                        { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+                        { opacity: 0.5, transform: `translate(${Math.cos(angle) * distance - 50}px, ${Math.sin(angle) * distance - 50}px) scale(0.5)` },
+                        { opacity: 0, transform: `translate(${Math.cos(angle) * distance * 1.8 - 50}px, ${Math.sin(angle) * distance * 1.8 - 50}px) scale(0)` }
+                    ], {
+                        duration: 1200,
+                        easing: 'ease-out'
+                    });
+                    
+                    animation.onfinish = () => {
+                        heart.remove();
+                    };
+                }, i * 50);
+            }
+        }
+        
+        // 创建星星爆炸效果
+        function createStarExplosion(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 6; i++) {
+                const star = document.createElement('div');
+                star.innerHTML = '★';
+                star.style.position = 'fixed';
+                star.style.left = `${centerX}px`;
+                star.style.top = `${centerY}px`;
+                star.style.fontSize = '0.9rem';
+                star.style.color = '#ffd700';
+                star.style.zIndex = '1000';
+                star.style.pointerEvents = 'none';
+                star.style.transform = 'translate(-50%, -50%)';
+                
+                document.body.appendChild(star);
+                
+                const angle = (Math.PI * 2 * i) / 6;
+                const distance = 40;
+                
+                const animation = star.animate([
+                    { opacity: 1, transform: 'translate(-50%, -50%) scale(1) rotate(0deg)' },
+                    { opacity: 0, transform: `translate(${Math.cos(angle) * distance - 50}px, ${Math.sin(angle) * distance - 50}px) scale(0) rotate(360deg)` }
+                ], {
+                    duration: 1000,
+                    easing: 'ease-out'
+                });
+                
+                animation.onfinish = () => {
+                    star.remove();
+                };
+            }
+        }
+        
+        // 创建魔法爆炸效果
+        function createMagicExplosion(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 5; i++) {
+                const magic = document.createElement('div');
+                magic.innerHTML = '✨';
+                magic.style.position = 'fixed';
+                magic.style.left = `${centerX}px`;
+                magic.style.top = `${centerY}px`;
+                magic.style.fontSize = '1.3rem';
+                magic.style.zIndex = '1000';
+                magic.style.pointerEvents = 'none';
+                magic.style.transform = 'translate(-50%, -50%)';
+                
+                document.body.appendChild(magic);
+                
+                const angle = (Math.PI * 2 * i) / 5;
+                const distance = 50;
+                
+                const animation = magic.animate([
+                    { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+                    { opacity: 0, transform: `translate(${Math.cos(angle) * distance - 50}px, ${Math.sin(angle) * distance - 50}px) scale(0)` }
+                ], {
+                    duration: 1100,
+                    easing: 'ease-out'
+                });
+                
+                animation.onfinish = () => {
+                    magic.remove();
+                };
+            }
+        }
+        
+        // 创建皇冠效果
+        function createCrownEffect(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const crown = document.createElement('div');
+            crown.innerHTML = '👑';
+            crown.style.position = 'fixed';
+            crown.style.left = `${centerX}px`;
+            crown.style.top = `${centerY}px`;
+            crown.style.fontSize = '2rem';
+            crown.style.zIndex = '1000';
+            crown.style.pointerEvents: 'none';
+            crown.style.transform = 'translate(-50%, -50%) scale(0)';
+            
+            document.body.appendChild(crown);
+            
+            const animation = crown.animate([
+                { transform: 'translate(-50%, -50%) scale(0) rotate(0deg)', opacity: 1 },
+                { transform: 'translate(-50%, -50%) scale(1.1) rotate(360deg)', opacity: 1 },
+                { transform: 'translate(-50%, -50%) scale(1) rotate(720deg)', opacity: 1 },
+                { transform: 'translate(-50%, -50%) scale(0) rotate(1080deg)', opacity: 0 }
+            ], {
+                duration: 1800,
+                easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+            });
+            
+            animation.onfinish = () => {
+                crown.remove();
+            };
+        }
+        
+        // 创建涟漪效果
+        function createRippleEffect(x, y) {
+            const ripple = document.createElement('div');
+            ripple.style.position = 'fixed';
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            ripple.style.width = '0';
+            ripple.style.height = '0';
+            ripple.style.borderRadius = '50%';
+            ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.zIndex = '1000';
+            ripple.style.pointerEvents = 'none';
+            
+            document.body.appendChild(ripple);
+            
+            const animation = ripple.animate([
+                { width: '0', height: '0', opacity: 1 },
+                { width: '120px', height: '120px', opacity: 0 }
+            ], {
+                duration: 700,
+                easing: 'ease-out'
+            });
+            
+            animation.onfinish = () => {
+                ripple.remove();
+            };
+        }
+        
+        // 求婚页面的特殊效果
+        function startProposalEffects() {
+            setTimeout(() => {
+                createHearts(isMobile ? 20 : 30);
+            }, 500);
+            
+            setTimeout(() => {
+                createSparkleBurst(isMobile ? 12 : 20);
+            }, 1000);
+        }
+        
+        // 庆祝效果
+        function startCelebrationEffects() {
+            createHearts(isMobile ? 40 : 80);
+            createSparkleBurst(isMobile ? 20 : 40);
+        }
+        
+        // 创建漂浮文字
+        function createFloatingWords(words = ['我爱你', '臭宝贝', '永远幸福', '999', '一辈子守护你','最重要的人']) {
+            const count = Math.floor(Math.random() * 3) + 1;
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const word = document.createElement('div');
+                    word.textContent = words[Math.floor(Math.random() * words.length)];
+                    word.style.position = 'fixed';
+                    word.style.left = `${Math.random() * 100}vw`;
+                    word.style.top = '100vh';
+                    word.style.fontSize = '1.1rem';
+                    word.style.color = '#ff9ec0';
+                    word.style.fontFamily = "'Dancing Script', cursive";
+                    word.style.fontWeight = 'bold';
+                    word.style.zIndex = '1000';
+                    word.style.pointerEvents = 'none';
+                    word.style.opacity = '0';
+                    word.style.textShadow = '0 0 10px currentColor';
+                    
+                    document.body.appendChild(word);
+                    
+                    const animation = word.animate([
+                        { transform: 'translateY(0) rotate(0deg)', opacity: 0 },
+                        { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                        { transform: `translateY(-${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                    ], {
+                        duration: Math.random() * 4000 + 2000,
+                        easing: 'linear'
+                    });
+                    
+                    animation.onfinish = () => {
+                        word.remove();
+                    };
+                }, i * 500);
+            }
+        }
+        
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            // 性能优化：按需加载背景效果
+            setTimeout(() => {
+                createCosmicBackground();
+                createMagicParticles();
+            }, 100);
+            
+            initNavigation();
+            initMusicPlayer();
+            initInteractiveElements();
+            
+            // 设置女友名字
+            const girlfriendName = "CLL";
+            if (girlfriendName) {
+                document.getElementById('girlfriendName').textContent = girlfriendName;
+                
+                document.querySelectorAll('.page-title').forEach(title => {
+                    if (title.textContent.includes('永恒之约')) {
+                        title.innerHTML = `给${girlfriendName}的永恒之约`;
+                    }
+                });
+            }
+            
+            // 初始效果 - 延迟加载优化性能
+            setTimeout(() => {
+                createSparkleBurst(isMobile ? 12 : 20);
+                createHearts(isMobile ? 10 : 15);
+            }, 500);
+            
+            // 显示手势提示
+            if (isMobile) {
+                setTimeout(() => {
+                    const swipeHint = document.getElementById('swipeHint');
+                    swipeHint.style.display = 'flex';
+                    setTimeout(() => {
+                        swipeHint.style.opacity = '1';
+                    }, 100);
+                }, 2000);
+                
+                setTimeout(() => {
+                    const swipeHint = document.getElementById('swipeHint');
+                    if (swipeHint.style.display !== 'none') {
+                        swipeHint.style.opacity = '0';
+                        setTimeout(() => {
+                            swipeHint.style.display = 'none';
+                        }, 300);
+                    }
+                }, 7000);
+            }
+            
+            // iOS特殊处理
+            if (isIOS) {
+                document.body.addEventListener('touchmove', function(e) {
+                    if (e.target.tagName !== 'VIDEO' && e.target.tagName !== 'AUDIO') {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+            }
+            
+            // 性能优化：页面隐藏时暂停动画
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    // 页面隐藏时减少动画
+                    document.querySelectorAll('.magic-particle').forEach(p => {
+                        p.style.animationPlayState = 'paused';
+                    });
+                } else {
+                    // 页面显示时恢复动画
+                    document.querySelectorAll('.magic-particle').forEach(p => {
+                        p.style.animationPlayState = 'running';
+                    });
+                }
+            });
+        });
+        
+        // 窗口调整大小处理 - 使用防抖优化性能
+        window.addEventListener('resize', debounce(() => {
+            // 重新设置轮播图位置
+            if (carouselContainer) {
+                setPositionByIndex();
+            }
+        }, 250));
+        
+        // 性能优化：页面卸载时清理资源
+        window.addEventListener('beforeunload', () => {
+            // 清理动画和事件监听器
+            if (carouselContainer) {
+                carouselContainer.removeEventListener('touchstart', touchStart);
+                carouselContainer.removeEventListener('touchmove', touchMove);
+                carouselContainer.removeEventListener('touchend', touchEnd);
+            }
+        });
+    </script>
+</body>
+</html>
