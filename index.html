@@ -3107,7 +3107,7 @@
             }
         }
         
-        // 创建皇冠效果
+        // 创建皇冠效果 - 修复语法错误
         function createCrownEffect(element) {
             const rect = element.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
@@ -3120,7 +3120,7 @@
             crown.style.top = `${centerY}px`;
             crown.style.fontSize = '2rem';
             crown.style.zIndex = '1000';
-            crown.style.pointerEvents: 'none';
+            crown.style.pointerEvents = 'none'; // 修复：使用=而不是:
             crown.style.transform = 'translate(-50%, -50%) scale(0)';
             
             document.body.appendChild(crown);
